@@ -67,7 +67,6 @@ COPY nginx /
 COPY default.conf /etc/nginx/conf.d/default.conf
 ARG SERVER_ROOT
 RUN sed -i "s#{SERVER_ROOT}#${SERVER_ROOT}#g" /etc/nginx/conf.d/default.conf
-RUN ln -s /usr/bin/php83 /usr/bin/php
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 WORKDIR /var/www
 COPY php_ini/php.ini /etc/php83/php.ini
