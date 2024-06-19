@@ -77,6 +77,7 @@ RUN apk upgrade
 FROM scratch
 COPY --from=builder / /
 WORKDIR /var/www
+RUN rm -rf /var/www/*
 EXPOSE 80
 EXPOSE 443
 RUN chmod +x /sbin/runit-wrapper
