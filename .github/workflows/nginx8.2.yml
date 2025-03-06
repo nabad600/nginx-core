@@ -25,7 +25,10 @@ jobs:
       
       - name: log into GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN}}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
-
+      - name: Security Scan
+        uses: aquasecurity/trivy-action@v0.3.0
+        with:
+          image-ref: myapp:latest
       - uses: actions/checkout@v2
       - name: Build Container image
         run: docker buildx build --platform linux/amd64,linux/arm64,linux/ppc64le,linux/s390x --build-arg SERVER_ROOT=/var/www/,DISPLAY_PHPERROR=On --tag ghcr.io/deck-app/nginx:v8.2 . --push
